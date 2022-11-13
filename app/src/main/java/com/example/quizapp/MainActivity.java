@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         btnSub = findViewById(R.id.Submit);
         btnSub.setOnClickListener(this);
 
+
         displayQuestion();
 
 
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         if (questionNumber == Questions.length)
         {
-            finishQuiz();
+            displayResult();
             return;
         }
 
@@ -76,7 +77,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         if(index == 0)
         {
-
             ArrayList<Integer> list = UniqueRandomNumbers(OptionsOfQ1.length);
             r1 = list.get(0);
             btnAns1.setText(OptionsOfQ1[r1]);
@@ -144,16 +144,42 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         Collections.shuffle(list);
         return list;
     }
-    void finishQuiz()
-    {
-        System.out.println("finish.");
-        displayResult();
-        return;
+
+////    void finishQuiz()
+//    {
+//        System.out.println("finish.");
+//        displayResult();
+//        return;
+//    }
+
+    public void displayResult() {
+        View a = findViewById(R.id.ans_A);
+        a.setVisibility(View.GONE);
+        View b = findViewById(R.id.ans_B);
+        b.setVisibility(View.GONE);
+        View c = findViewById(R.id.ans_C);
+        c.setVisibility(View.GONE);
+        View d = findViewById(R.id.ans_D);
+        d.setVisibility(View.GONE);
+        View s = findViewById(R.id.Submit);
+        s.setVisibility(View.GONE);
+        View q = findViewById(R.id.Question);
+        q.setVisibility(View.GONE);
+        View t = findViewById(R.id.TotalQuestions);
+        t.setVisibility(View.GONE);
+
+        TextView rightAns, wrongAns;
+
+        rightAns = findViewById(R.id.right_Ans);
+        rightAns.setOnClickListener(this);
+        rightAns.setText("Total Right Answers: "+ right);
+        wrongAns = findViewById(R.id.wrong_Ans);
+        wrongAns.setOnClickListener(this);
+        wrongAns.setText("Total Wrong Answers: "+ wrong);
+
     }
 
-    private void displayResult() {
 
-    }
 
     public void onClick(View view) {
         btnAns1.setBackgroundColor(Color.WHITE);
@@ -176,6 +202,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                 System.out.println("wrong"+wrong);
             }
             questionNumber ++;
+            System.out.println("Question number" + questionNumber);
             displayQuestion();
         }
         else

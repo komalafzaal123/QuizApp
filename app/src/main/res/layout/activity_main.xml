@@ -49,6 +49,7 @@
         android:id="@+id/Question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
 
         android:text="What is android studio?"
         android:textColor="@android:color/white"
@@ -135,4 +136,34 @@
         app:layout_constraintTop_toBottomOf="@+id/ans_D"
         app:layout_constraintVertical_bias="0.0"/>
 
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/right_Ans"
+            android:text="Right Answers"
+            app:layout_constraintTop_toTopOf="@+id/quizMainImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:background="@color/purple_700"
+            />
+
+    <TextView
+        android:id="@+id/wrong_Ans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wrong Answers"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.604"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/right_Ans"
+        app:layout_constraintVertical_bias="0.094"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:background="@color/purple_700"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
