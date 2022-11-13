@@ -9,7 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
-
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             "None of the above"};//Yes, Class can be immutable
     String OptionsOfQ5[]={"Only one","Two"," AsyncTask doesn't have tread","None of the Above"};//Only one
 
-    TextView tv1, tq;
+    TextView tv1, tq, username, dateTime;
     Button btnAns1, btnAns2, btnAns3, btnAns4, btnSub;
     TextView rightAns, wrongAns;
 
@@ -63,6 +64,10 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         r.setVisibility(View.GONE);
         View w = findViewById(R.id.wrong_Ans);
         w.setVisibility(View.GONE);
+        View n = findViewById(R.id.username);
+        n.setVisibility(View.GONE);
+        View d = findViewById(R.id.date);
+        d.setVisibility(View.GONE);
 
         displayQuestion();
 
@@ -170,21 +175,26 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         t.setVisibility(View.GONE);
 
 
+        Date currentTime = Calendar.getInstance().getTime();
+
+
         View r = findViewById(R.id.right_Ans);
         r.setVisibility(View.VISIBLE);
         View w = findViewById(R.id.wrong_Ans);
         w.setVisibility(View.VISIBLE);
+        View n = findViewById(R.id.username);
+        n.setVisibility(View.VISIBLE);
+        View d1 = findViewById(R.id.date);
+        d1.setVisibility(View.VISIBLE);
 
-
+        dateTime = findViewById(R.id.date);
+        dateTime.setText("Date: "+ currentTime);
         rightAns = findViewById(R.id.right_Ans);
-        rightAns.setOnClickListener(this);
         rightAns.setText("Total Right Answers: "+ right);
         wrongAns = findViewById(R.id.wrong_Ans);
-        wrongAns.setOnClickListener(this);
         wrongAns.setText("Total Wrong Answers: "+ wrong);
 
     }
-
 
 
     public void onClick(View view) {
