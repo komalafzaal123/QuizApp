@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             "None of the above"};//Yes, Class can be immutable
     String OptionsOfQ5[]={"Only one","Two"," AsyncTask doesn't have tread","None of the Above"};//Only one
 
-    TextView tv1, tq, username, dateTime;
+    TextView tv1, tq, dateTime;
     Button btnAns1, btnAns2, btnAns3, btnAns4, btnSub;
     TextView rightAns, wrongAns;
 
@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         r.setVisibility(View.GONE);
         View w = findViewById(R.id.wrong_Ans);
         w.setVisibility(View.GONE);
-        View n = findViewById(R.id.username);
-        n.setVisibility(View.GONE);
         View d = findViewById(R.id.date);
         d.setVisibility(View.GONE);
 
@@ -182,8 +180,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         r.setVisibility(View.VISIBLE);
         View w = findViewById(R.id.wrong_Ans);
         w.setVisibility(View.VISIBLE);
-        View n = findViewById(R.id.username);
-        n.setVisibility(View.VISIBLE);
         View d1 = findViewById(R.id.date);
         d1.setVisibility(View.VISIBLE);
 
