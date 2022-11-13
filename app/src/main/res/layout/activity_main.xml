@@ -26,9 +26,10 @@
         android:layout_width="207dp"
         android:layout_height="32dp"
 
-        android:text="Total Questions 5"
+        android:text="Total "
         android:textColor="@android:color/white"
-        android:textSize="25sp"
+        android:textSize="18sp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -27,15 +27,15 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             "None of the above"};//Yes, Class can be immutable
     String OptionsOfQ5[]={"Only one","Two"," AsyncTask doesn't have tread","None of the Above"};//Only one
 
-    TextView tv1;
+    TextView tv1, tq;
     Button btnAns1, btnAns2, btnAns3, btnAns4, btnSub;
+    TextView rightAns, wrongAns;
 
     String choosedAnswer = "";
     int right = 0, wrong = 0;
     int questionNumber = 0;
     int index = 0, next = 0;
     int r1 = 0, r2 = 0, r3 = 0, r4 = 0 ;
-
 
     ArrayList<Integer> l = UniqueRandomNumbers(Questions.length);
 
@@ -55,7 +55,15 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         btnAns4.setOnClickListener(this);
         btnSub = findViewById(R.id.Submit);
         btnSub.setOnClickListener(this);
+        tq = findViewById(R.id.TotalQuestions);
+        tq.setOnClickListener(this);
 
+        tq.setText("Total Questions: "+ Questions.length);
+
+        View r = findViewById(R.id.right_Ans);
+        r.setVisibility(View.GONE);
+        View w = findViewById(R.id.wrong_Ans);
+        w.setVisibility(View.GONE);
 
         displayQuestion();
 
@@ -145,12 +153,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         return list;
     }
 
-////    void finishQuiz()
-//    {
-//        System.out.println("finish.");
-//        displayResult();
-//        return;
-//    }
 
     public void displayResult() {
         View a = findViewById(R.id.ans_A);
@@ -168,7 +170,12 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         View t = findViewById(R.id.TotalQuestions);
         t.setVisibility(View.GONE);
 
-        TextView rightAns, wrongAns;
+
+        View r = findViewById(R.id.right_Ans);
+        r.setVisibility(View.VISIBLE);
+        View w = findViewById(R.id.wrong_Ans);
+        w.setVisibility(View.VISIBLE);
+
 
         rightAns = findViewById(R.id.right_Ans);
         rightAns.setOnClickListener(this);
