@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         btnSub = findViewById(R.id.Submit);
         btnSub.setOnClickListener(this);
         tq = findViewById(R.id.TotalQuestions);
-        tq.setOnClickListener(this);
 
         tq.setText("Total Questions: "+ Questions.length);
 
