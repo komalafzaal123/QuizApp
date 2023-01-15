@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class showResult extends AppCompatActivity {
@@ -32,8 +33,18 @@ public class showResult extends AppCompatActivity {
 
         db = new DbHelper(showResult.this);
 
+
         List<QuizData> list = db.getAllData();
-        ArrayAdapter arrayAdapter = new ArrayAdapter<QuizData>(showResult.this, android.R.layout.simple_list_item_1,list);
+
+        List<String> myStringList = new ArrayList<>();
+        int count = 0;
+        while(count<list.size()){
+            myStringList.add(list.get(count).getQuestion());
+            myStringList.add(list.get(count).getChoosedAns());
+            myStringList.add(list.get(count).getCorrectAns());
+            count++;
+        }
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(showResult.this, android.R.layout.simple_list_item_1,myStringList);
         listViewQuiz.setAdapter(arrayAdapter);
 
 
