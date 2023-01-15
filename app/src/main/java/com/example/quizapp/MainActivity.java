@@ -2,6 +2,7 @@ package com.example.quizapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     String correctAnswers[]={"startActiivtyForResult()","10 sec","Peace of Activity","Yes, Class can be immutable", "Only one"};
 
     TextView tv1, tq, dateTime;
-    Button btnAns1, btnAns2, btnAns3, btnAns4, btnSub, show;
+    Button btnAns1, btnAns2, btnAns3, btnAns4, btnSub, btnShow;
     TextView rightAns, wrongAns;
 
     String choosedAnswer = "";
@@ -60,8 +61,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         btnAns4.setOnClickListener(this);
         btnSub = findViewById(R.id.submit);
         btnSub.setOnClickListener(this);
-        show = findViewById(R.id.Show);
-        show.setOnClickListener(this);
+        btnShow = findViewById(R.id.Show);
+        btnShow.setOnClickListener(this);
         tq = findViewById(R.id.TotalQuestions);
 
         tq.setText("Total Questions: "+ Questions.length);
@@ -222,17 +223,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             else{
                 wrong++;
             }
-//            if(choosedAnswer == "startActiivtyForResult()"|| choosedAnswer == "10 sec" ||
-//                    choosedAnswer == "Peace of Activity" || choosedAnswer == "Yes, Class can be immutable" || choosedAnswer == "Only one")
-//            {
-//                right++;
-//                System.out.println("right"+right);
-//            }
-//            else
-//            {
-//                wrong++;
-//                System.out.println("wrong"+wrong);
-//            }
             questionNumber ++;
             System.out.println("Question number" + questionNumber);
             displayQuestion();
@@ -242,6 +232,10 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             choosedAnswer = clickedButton.getText().toString();
             System.out.println(choosedAnswer);
             clickedButton.setBackgroundColor(Color.YELLOW);
+        }
+        if (clickedButton.getId() == R.id.Show){
+            Intent intent = new Intent(this, showResult.class);
+            startActivity(intent);
         }
     }
 }

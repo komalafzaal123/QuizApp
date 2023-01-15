@@ -2,13 +2,15 @@ package com.example.quizapp;
 
 public class QuizData {
     private int id;
+    private String Question;
     private String ChoosedAns;
     private String CorrectAns;
 
-    public QuizData(int id, String correctAns, String choosedAns) {
+    public QuizData(int id, String question, String choosedAns, String correctAns) {
         this.id = id;
-        CorrectAns = correctAns;
+        Question = question;
         ChoosedAns = choosedAns;
+        CorrectAns = correctAns;
     }
 
     public int getId() {
@@ -17,6 +19,14 @@ public class QuizData {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getQuestion() {
+        return Question;
+    }
+
+    public void setQuestion(String question) {
+        Question = question;
     }
 
     public String getChoosedAns() {
@@ -34,6 +44,4 @@ public class QuizData {
     public void setCorrectAns(String correctAns) {
         CorrectAns = correctAns;
     }
-
-
 }

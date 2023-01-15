@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "dbb";
     private static final int DB_VERSION = 1;
@@ -38,6 +40,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
+
     // this method is use to add new course to our sqlite database.
     public void addNewCourse(String question, String correctAnswer) {
 
@@ -53,8 +56,7 @@ public class DbHelper extends SQLiteOpenHelper {
 //        db.close();
     }
 
-    public boolean isAnswerCorrect(String question, String answerByUser)
-    {
+    public boolean isAnswerCorrect(String question, String answerByUser) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " +
                         TABLE_NAME + " WHERE " +
@@ -77,9 +79,24 @@ public class DbHelper extends SQLiteOpenHelper {
 //        db.execSQL(strSQL);
 //        db.close();
 
-        ContentValues values= new ContentValues();
+        ContentValues values = new ContentValues();
         values.put(USER_ANSWER, answer);
-        db.update(TABLE_NAME, values,QUESTION+" = ?", new String[]{question});
+        db.update(TABLE_NAME, values, QUESTION + " = ?", new String[]{question});
+    }
+
+    public ArrayList<QuizData> getAllData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        ArrayList<QuizData> dataArrayList = new ArrayList<QuizData>();
+        if (cursor.moveToFirst()) {
+            do {
+                QuizData data = new QuizData(cursor.getInt(0), cursor.getString(1),cursor.getString(2),cursor.getString(3));
+                dataArrayList.add(data);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return dataArrayList;
     }
 }
-
