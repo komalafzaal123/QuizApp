@@ -1,43 +1,72 @@
 package com.example.quizapp;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
+    private static final String DB_NAME = "dbb";
+    private static final int DB_VERSION = 1;
+    private static final String TABLE_NAME = "mytable";
+    private static final String ID_COL = "id";
+    private static final String QUESTION = "ques";
+    private static final String CORRECT_ANSWER = "ans";
 
-    public static final String Database_Name = "MyQuizApp.db";
-    public static final String Table_Name = "QUIZData";
-    public static final String QuizData_Id = "QUIZid";
-    public static final String Quiz_ChoosedAns = "QUIZchoosedans";
-    public static final String QuizData_CorrectAns = "QUIZcorrectans";
-
-    public DbHelper(@Nullable Context context) {
-        super(context, Database_Name, null, 1);
-    }
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String query = "CREATE TABLE IF NOT EXISTS " + Table_Name + " (" + QuizData_Id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Quiz_ChoosedAns + " TEXT, " +
-                QuizData_CorrectAns + " TEXT )";
-        sqLiteDatabase.execSQL(query);
+    public DbHelper(Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        String query = "DROP TABLE IF EXISTS " + Table_Name;
-        sqLiteDatabase.execSQL(query);
-        onCreate(sqLiteDatabase);
+    public void onCreate(SQLiteDatabase db) {
+        String query = "CREATE TABLE " + TABLE_NAME + " ("
+                + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + QUESTION + " TEXT, "
+                + CORRECT_ANSWER + " TEXT)";
+
+        db.execSQL(query);
     }
 
-   // @Override
-//    public void onCreate(SQLiteDatabase db) {
-//
-//    }
-//
-//    @Override
-//    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//
-//    }
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // this method is called to check if the table exists already.
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+    }
+    // this method is use to add new course to our sqlite database.
+    public void addNewCourse(String question, String correctAnswer) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(QUESTION, question);
+        values.put(CORRECT_ANSWER, correctAnswer);
+
+        db.insert(TABLE_NAME, null, values);
+
+        db.close();
+    }
+
+    public boolean isAnswerCorrect(String question, String answerByUser)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " +
+                        TABLE_NAME + " WHERE " +
+                        QUESTION + "=? AND " +
+                        CORRECT_ANSWER + "=?",
+                new String[]{question, answerByUser});
+
+        // now you have the results, DON'T return them, just check if contains
+        // > Java 7: if (!Objects.equals(cursor, null) && cursor.getCount() > 0) {
+        if (cursor != null && cursor.getCount() > 0) {
+            return true;
+        }
+
+        return false;
+    }
 }
+

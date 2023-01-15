@@ -16,6 +16,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity  implements View.OnClickListener
 {
+    DbHelper db;
 
     String Questions[]={"How to get a response from an activity in Android?",
             "What is the time limit of broadcast receiver in android?","What is fragment in android?",
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     String OptionsOfQ4[]={"No, it can't","Yes, Class can be immutable","Can't make the class as final class",
             "None of the above"};//Yes, Class can be immutable
     String OptionsOfQ5[]={"Only one","Two"," AsyncTask doesn't have tread","None of the Above"};//Only one
+    String correctAnswers[]={"startActiivtyForResult()","10 sec","Peace of Activity","Yes, Class can be immutable", "Only one"};
 
     TextView tv1, tq, dateTime;
     Button btnAns1, btnAns2, btnAns3, btnAns4, btnSub;
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new DbHelper(MainActivity.this);
 
         tv1 = findViewById(R.id.Question);
         btnAns1 = findViewById(R.id.ans_A);
@@ -145,6 +149,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             r4 = list.get(3);
             btnAns4.setText(OptionsOfQ5[r4]);
         }
+        db.addNewCourse(tv1.getText().toString(), correctAnswers[index]);
     }
 
     public  ArrayList<Integer> UniqueRandomNumbers (int length) {
@@ -202,11 +207,11 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         Button clickedButton = (Button) view;
         if (clickedButton.getId() == R.id.Submit) {
 
+            Boolean found = db.isAnswerCorrect(tv1.getText().toString(),choosedAnswer);
             if(choosedAnswer == "startActiivtyForResult()"|| choosedAnswer == "10 sec" ||
                     choosedAnswer == "Peace of Activity" || choosedAnswer == "Yes, Class can be immutable" || choosedAnswer == "Only one")
             {
                 right++;
-                DbHelper db = new DbHelper(MainActivity.this);
                 System.out.println("right"+right);
             }
             else
