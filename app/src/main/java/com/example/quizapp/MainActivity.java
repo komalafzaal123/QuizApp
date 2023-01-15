@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     String correctAnswers[]={"startActiivtyForResult()","10 sec","Peace of Activity","Yes, Class can be immutable", "Only one"};
 
     TextView tv1, tq, dateTime;
-    Button btnAns1, btnAns2, btnAns3, btnAns4, btnSub;
+    Button btnAns1, btnAns2, btnAns3, btnAns4, btnSub, show;
     TextView rightAns, wrongAns;
 
     String choosedAnswer = "";
@@ -58,8 +58,10 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         btnAns3.setOnClickListener(this);
         btnAns4 = findViewById(R.id.ans_D);
         btnAns4.setOnClickListener(this);
-        btnSub = findViewById(R.id.Submit);
+        btnSub = findViewById(R.id.submit);
         btnSub.setOnClickListener(this);
+        show = findViewById(R.id.Show);
+        show.setOnClickListener(this);
         tq = findViewById(R.id.TotalQuestions);
 
         tq.setText("Total Questions: "+ Questions.length);
@@ -70,6 +72,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         w.setVisibility(View.GONE);
         View d = findViewById(R.id.date);
         d.setVisibility(View.GONE);
+        View s = findViewById(R.id.Show);
+        s.setVisibility(View.GONE);
 
         displayQuestion();
 
@@ -170,7 +174,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         c.setVisibility(View.GONE);
         View d = findViewById(R.id.ans_D);
         d.setVisibility(View.GONE);
-        View s = findViewById(R.id.Submit);
+        View s = findViewById(R.id.submit);
         s.setVisibility(View.GONE);
         View q = findViewById(R.id.Question);
         q.setVisibility(View.GONE);
@@ -187,6 +191,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         w.setVisibility(View.VISIBLE);
         View d1 = findViewById(R.id.date);
         d1.setVisibility(View.VISIBLE);
+        View s1 = findViewById(R.id.Show);
+        s1.setVisibility(View.VISIBLE);
 
         dateTime = findViewById(R.id.date);
         dateTime.setText("Date: "+ currentTime);
@@ -205,7 +211,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         btnAns4.setBackgroundColor(Color.WHITE);
 
         Button clickedButton = (Button) view;
-        if (clickedButton.getId() == R.id.Submit) {
+        if (clickedButton.getId() == R.id.submit) {
 
             db.updateUserAnswer(tv1.getText().toString(), choosedAnswer);
             Boolean found = db.isAnswerCorrect(tv1.getText().toString(),choosedAnswer);

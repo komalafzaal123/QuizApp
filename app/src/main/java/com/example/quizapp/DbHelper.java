@@ -50,7 +50,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_NAME, null, values);
 
-        db.close();
+//        db.close();
     }
 
     public boolean isAnswerCorrect(String question, String answerByUser)
@@ -80,7 +80,6 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues values= new ContentValues();
         values.put(USER_ANSWER, answer);
         db.update(TABLE_NAME, values,QUESTION+" = ?", new String[]{question});
-        db.close();
     }
 }
 
