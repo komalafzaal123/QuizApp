@@ -207,18 +207,26 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         Button clickedButton = (Button) view;
         if (clickedButton.getId() == R.id.Submit) {
 
+            db.updateUserAnswer(tv1.getText().toString(), choosedAnswer);
             Boolean found = db.isAnswerCorrect(tv1.getText().toString(),choosedAnswer);
-            if(choosedAnswer == "startActiivtyForResult()"|| choosedAnswer == "10 sec" ||
-                    choosedAnswer == "Peace of Activity" || choosedAnswer == "Yes, Class can be immutable" || choosedAnswer == "Only one")
+            if (found == true)
             {
                 right++;
-                System.out.println("right"+right);
             }
-            else
-            {
+            else{
                 wrong++;
-                System.out.println("wrong"+wrong);
             }
+//            if(choosedAnswer == "startActiivtyForResult()"|| choosedAnswer == "10 sec" ||
+//                    choosedAnswer == "Peace of Activity" || choosedAnswer == "Yes, Class can be immutable" || choosedAnswer == "Only one")
+//            {
+//                right++;
+//                System.out.println("right"+right);
+//            }
+//            else
+//            {
+//                wrong++;
+//                System.out.println("wrong"+wrong);
+//            }
             questionNumber ++;
             System.out.println("Question number" + questionNumber);
             displayQuestion();

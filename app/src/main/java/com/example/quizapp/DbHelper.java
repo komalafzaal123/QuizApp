@@ -15,6 +15,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String ID_COL = "id";
     private static final String QUESTION = "ques";
     private static final String CORRECT_ANSWER = "ans";
+    private static final String USER_ANSWER = "user_answer";
 
     public DbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -25,6 +26,7 @@ public class DbHelper extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + QUESTION + " TEXT, "
+                + USER_ANSWER + " TEXT, "
                 + CORRECT_ANSWER + " TEXT)";
 
         db.execSQL(query);
@@ -67,6 +69,18 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         return false;
+    }
+
+    public void updateUserAnswer(String question, String answer) {
+        SQLiteDatabase db = this.getWritableDatabase();
+//        String strSQL = "UPDATE " + TABLE_NAME + " SET " + USER_ANSWER + " = " + answer + " WHERE " + QUESTION + " LIKE " + question;
+//        db.execSQL(strSQL);
+//        db.close();
+
+        ContentValues values= new ContentValues();
+        values.put(USER_ANSWER, answer);
+        db.update(TABLE_NAME, values,QUESTION+" = ?", new String[]{question});
+        db.close();
     }
 }
 
