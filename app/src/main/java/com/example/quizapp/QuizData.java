@@ -6,6 +6,13 @@ public class QuizData {
     private String ChoosedAns;
     private String CorrectAns;
 
+    public QuizData(String question, String choosedAns, String correctAns) {
+        this.id = id;
+        Question = question;
+        ChoosedAns = choosedAns;
+        CorrectAns = correctAns;
+    }
+
     public QuizData(int id, String question, String choosedAns, String correctAns) {
         this.id = id;
         Question = question;

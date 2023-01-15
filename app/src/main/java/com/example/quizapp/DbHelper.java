@@ -85,18 +85,24 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<QuizData> getAllData() {
+
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-        ArrayList<QuizData> dataArrayList = new ArrayList<QuizData>();
-        if (cursor.moveToFirst()) {
+
+        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
+        ArrayList<QuizData> dataArrayList = new ArrayList<>();
+
+        // moving our cursor to first position.
+        if (cursorCourses.moveToFirst()) {
             do {
-                QuizData data = new QuizData(cursor.getInt(0), cursor.getString(1),cursor.getString(2),cursor.getString(3));
-                dataArrayList.add(data);
-            } while (cursor.moveToNext());
+                dataArrayList.add(new QuizData(cursorCourses.getString(1),
+                        cursorCourses.getString(2),
+                        cursorCourses.getString(3)));
+            } while (cursorCourses.moveToNext());
+
         }
-        cursor.close();
-        db.close();
+
+        cursorCourses.close();
         return dataArrayList;
     }
 }
