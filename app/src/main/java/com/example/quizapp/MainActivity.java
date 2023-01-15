@@ -206,6 +206,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                     choosedAnswer == "Peace of Activity" || choosedAnswer == "Yes, Class can be immutable" || choosedAnswer == "Only one")
             {
                 right++;
+                DbHelper db = new DbHelper(MainActivity.this);
                 System.out.println("right"+right);
             }
             else
