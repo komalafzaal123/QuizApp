@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     TextView tv1, tq, dateTime;
     Button btnAns1, btnAns2, btnAns3, btnAns4, btnSub, btnShow;
     TextView rightAns, wrongAns;
+    Button btnCommit;
 
     String choosedAnswer = "";
     int right = 0, wrong = 0;
@@ -63,6 +65,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         btnSub.setOnClickListener(this);
         btnShow = findViewById(R.id.Show);
         btnShow.setOnClickListener(this);
+        btnCommit = findViewById(R.id.Commits);
+        btnCommit.setOnClickListener(this);
         tq = findViewById(R.id.TotalQuestions);
 
         tq.setText("Total Questions: "+ Questions.length);
@@ -75,7 +79,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         d.setVisibility(View.GONE);
         View s = findViewById(R.id.Show);
         s.setVisibility(View.GONE);
-
+        View c = findViewById(R.id.Commits);
+        c.setVisibility(View.GONE);
         displayQuestion();
 
 
@@ -194,6 +199,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         d1.setVisibility(View.VISIBLE);
         View s1 = findViewById(R.id.Show);
         s1.setVisibility(View.VISIBLE);
+        View c1 = findViewById(R.id.Commits);
+        c1.setVisibility(View.VISIBLE);
 
         dateTime = findViewById(R.id.date);
         dateTime.setText("Date: "+ currentTime);
@@ -204,6 +211,11 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     }
 
+    private void goToUrl(String url) {
+        Uri uriUrl = Uri.parse(url);
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
+    }
 
     public void onClick(View view) {
         btnAns1.setBackgroundColor(Color.WHITE);
@@ -236,6 +248,11 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         if (clickedButton.getId() == R.id.Show){
             Intent intent = new Intent(this, showResult.class);
             startActivity(intent);
+        }
+        if(clickedButton.getId() == R.id.Commits){
+            {
+                goToUrl("https://github.com/komalafzaal123/QuizApp/commits/main");
+            }
         }
     }
 }
