@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -34,9 +35,9 @@ public class showResult extends AppCompatActivity {
         List<String> myStringList = new ArrayList<>();
         int count = 0;
         while (count < list.size()) {
-            myStringList.add(list.get(count).getQuestion());
-            myStringList.add(list.get(count).getChoosedAns());
-            myStringList.add(list.get(count).getCorrectAns());
+            myStringList.add("Question: "+ list.get(count).getQuestion());
+            myStringList.add("Your Answer: "+ list.get(count).getChoosedAns());
+            myStringList.add("Correct Answer: "+ list.get(count).getCorrectAns());
             count++;
         }
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(showResult.this, android.R.layout.simple_list_item_1, myStringList);
