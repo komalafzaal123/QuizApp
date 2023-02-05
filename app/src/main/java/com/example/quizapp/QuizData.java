@@ -7,7 +7,6 @@ public class QuizData {
     private String CorrectAns;
 
     public QuizData(String question, String choosedAns, String correctAns) {
-        this.id = id;
         Question = question;
         ChoosedAns = choosedAns;
         CorrectAns = correctAns;
